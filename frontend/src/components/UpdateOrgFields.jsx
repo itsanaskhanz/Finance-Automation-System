@@ -13,8 +13,7 @@ const UpdateOrgFields = () => {
   });
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  const apiUrl = import.meta.env.VITE_API_URL
-
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,7 +42,7 @@ const UpdateOrgFields = () => {
       setMessage('Please enter at least one field to update');
       return;
     }
-    setMessage('')
+    setMessage('');
     setLoading(true);
     try {
       const response = await fetch(`${apiUrl}/organization/update/${organizationId}`, {
@@ -65,7 +64,6 @@ const UpdateOrgFields = () => {
 
       setMessage(`${updatedFieldsMessage} , updated in ${organizationId}`);
     } catch (error) {
-      console.error('Update failed:', error);
       setMessage(error.message || 'Update failed');
     } finally {
       setLoading(false);
@@ -92,7 +90,6 @@ const UpdateOrgFields = () => {
           value={formData.ntn}
           onChange={handleChange}
           disabled={loading}
-
         />
         <input
           type="text"
@@ -101,7 +98,6 @@ const UpdateOrgFields = () => {
           value={formData.strn}
           onChange={handleChange}
           disabled={loading}
-
         />
         <input
           type="text"
@@ -110,7 +106,6 @@ const UpdateOrgFields = () => {
           value={formData.kntn}
           onChange={handleChange}
           disabled={loading}
-
         />
         <input
           type="text"
@@ -119,7 +114,6 @@ const UpdateOrgFields = () => {
           value={formData.sr_entity}
           onChange={handleChange}
           disabled={loading}
-
         />
         <input
           type="text"
@@ -128,7 +122,6 @@ const UpdateOrgFields = () => {
           value={formData.sr_user}
           onChange={handleChange}
           disabled={loading}
-
         />
         <input
           type="text"
@@ -137,7 +130,6 @@ const UpdateOrgFields = () => {
           value={formData.sr_key}
           onChange={handleChange}
           disabled={loading}
-
         />
         <input
           type="text"
@@ -146,7 +138,6 @@ const UpdateOrgFields = () => {
           value={formData.pos_id}
           onChange={handleChange}
           disabled={loading}
-
         />
 
         {organizationId && (
@@ -155,8 +146,6 @@ const UpdateOrgFields = () => {
           </button>
         )}
       </form>
-
-      <br />
 
       {loading && <p>Loading...</p>}
 

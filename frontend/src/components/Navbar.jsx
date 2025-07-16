@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import '../css/Navbar.css';
 
 const Navbar = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    console.log('Searching for:', searchTerm);
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsLoggedIn(!!token);
+  }, [location]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+    navigate('/login');
   };
 
   return (
@@ -19,16 +27,14 @@ const Navbar = () => {
           className="navbar-logo"
         />
       </Link>
-      {/* Uncomment below if you plan to use the search */}
-      {/* <form className="navbar-search" onSubmit={handleSearch}>
-        <input
-          type="text"
-          placeholder="Search..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <button type="submit">Go</button>
-      </form> */}
+
+      <div className="navbar-buttons">
+        {isLoggedIn ? (
+          <button onClick={handleLogout}>Logout</button>
+        ) : (
+          <button onClick={() => navigate('/login')}>Login</button>
+        )}
+      </div>
     </div>
   );
 };

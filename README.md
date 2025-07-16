@@ -48,6 +48,8 @@ A smart finance automation system designed to streamline expense tracking, budge
    DB_PASSWORD=your-database-password
 
    DB_NAME=your-database-name
+
+   CORS_ORIGIN=frontend-api-url
    ```
 
 3. Start the server:

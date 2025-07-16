@@ -8,7 +8,7 @@ const FindOrgStatus = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [search, setSearch] = useState('');
-  const apiUrl = import.meta.env.VITE_API_URL
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     if (!status) return;
@@ -28,7 +28,6 @@ const FindOrgStatus = () => {
           setMessage('No organizations match the selected status.');
         }
       } catch (err) {
-        console.error('Fetch error:', err.message);
         setError('Error fetching organizations.');
       } finally {
         setLoading(false);

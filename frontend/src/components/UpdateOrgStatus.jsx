@@ -6,17 +6,15 @@ const UpdateOrgStatus = () => {
   const [orgId, setOrgId] = useState('');
   const [message, setMessage] = useState('');
   const [orgData, setOrgData] = useState(null);
-  const [loading, setLoading] = useState(false); 
-  
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const apiUrl = import.meta.env.VITE_API_URL
-
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const handleEnable = async () => {
-    setOrgData(null)
-    setMessage('')
-    setLoading(true); 
-    setError(''); 
+    setOrgData(null);
+    setMessage('');
+    setLoading(true);
+    setError('');
     try {
       const response = await fetch(`${apiUrl}/organization/enable/${orgId}`, {
         method: 'PUT',
@@ -24,18 +22,18 @@ const UpdateOrgStatus = () => {
       const data = await response.json();
       setMessage(data.message);
       setOrgData(data.organization);
-    } catch (error) {
+    } catch {
       setError('Failed to enable organization');
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
   const handleDisable = async () => {
-    setOrgData(null)
-    setMessage('')
-    setLoading(true); 
-    setError(''); 
+    setOrgData(null);
+    setMessage('');
+    setLoading(true);
+    setError('');
     try {
       const response = await fetch(`${apiUrl}/organization/disable/${orgId}`, {
         method: 'PUT',
@@ -43,7 +41,7 @@ const UpdateOrgStatus = () => {
       const data = await response.json();
       setMessage(data.message);
       setOrgData(data.organization);
-    } catch (error) {
+    } catch {
       setError('Failed to disable organization');
     } finally {
       setLoading(false);
@@ -69,23 +67,25 @@ const UpdateOrgStatus = () => {
         <div className="form-group">
           <label>Status:</label>
           <div className="radio-group">
-            <button 
-              disabled={loading} 
+            <button
+              disabled={loading}
               onClick={handleEnable}>
               Enable Org
             </button>
-            <button 
-              disabled={loading} 
+            <button
+              disabled={loading}
               onClick={handleDisable}>
               Disable Org
             </button>
           </div>
         </div>
       )}
-      {loading && <p>Loading...</p>} 
+
+      {loading && <p>Loading...</p>}
 
       {message && <p>{message}</p>}
       {error && <p className="error">{error}</p>}
+
       {orgData && (
         <div>
           <p><strong>ID:</strong> {orgData.id}</p>
